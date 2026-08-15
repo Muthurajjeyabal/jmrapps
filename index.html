@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JMR Apps — Smart Apps, Better Life</title>
+<style>
+  :root{
+    --ink:#0E1220;
+    --paper:#F6F5F2;
+    --card:#FFFFFF;
+    --blue:#2B6CF6;
+    --blue-dark:#1741A6;
+    --orange:#F97A2A;
+    --muted:#6B7280;
+    --line:#E7E5E0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Segoe UI', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    line-height:1.5;
+  }
+  @font-face{
+    font-family:'Display';
+    src:local('Georgia');
+  }
+
+  /* ---- HERO ---- */
+  .hero{
+    background:
+      radial-gradient(circle at 15% 20%, rgba(43,108,246,0.35), transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(249,122,42,0.30), transparent 45%),
+      linear-gradient(160deg, #0E1220 0%, #161B2E 60%, #10142A 100%);
+    color:#fff;
+    padding:64px 24px 56px;
+    position:relative;
+    overflow:hidden;
+  }
+  .dock-row{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:38px;
+    flex-wrap:wrap;
+    opacity:0;
+    animation:riseIn .8s ease forwards;
+    animation-delay:.15s;
+  }
+  .dock-icon{
+    width:46px; height:46px;
+    border-radius:13px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.35);
+    transform:translateY(0);
+    transition:transform .35s ease;
+  }
+  .dock-icon:hover{ transform:translateY(-6px); }
+  .hero-inner{
+    max-width:720px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:#B9C2E0;
+    border:1px solid rgba(255,255,255,0.18);
+    padding:6px 14px; border-radius:100px;
+    margin-bottom:22px;
+    opacity:0;
+    animation:riseIn .7s ease forwards;
+    animation-delay:.05s;
+  }
+  .badge .dot{ width:6px; height:6px; border-radius:50%; background:var(--orange); }
+  h1{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:44px;
+    line-height:1.12;
+    font-weight:700;
+    letter-spacing:-.01em;
+    margin-bottom:16px;
+    opacity:0;
+    animation:riseIn .8s ease forwards;
+    animation-delay:.2s;
+  }
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg, #7CA6FF, var(--orange));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p{
+    font-size:16px;
+    color:#B9C2E0;
+    max-width:480px;
+    margin:0 auto 30px;
+    opacity:0;
+    animation:riseIn .8s ease forwards;
+    animation-delay:.3s;
+  }
+  .hero-cta{
+    display:inline-flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+    opacity:0;
+    animation:riseIn .8s ease forwards;
+    animation-delay:.4s;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px;
+    border-radius:100px;
+    font-size:14px; font-weight:600;
+    text-decoration:none;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(100deg, var(--blue), var(--orange));
+    color:#fff;
+    box-shadow:0 10px 24px rgba(43,108,246,0.35);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(43,108,246,0.45); }
+  .btn-ghost{
+    border:1px solid rgba(255,255,255,0.25);
+    color:#fff;
+  }
+  .btn-ghost:hover{ background:rgba(255,255,255,0.08); }
+
+  @keyframes riseIn{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* ---- APP GRID ---- */
+  .section{
+    max-width:1080px;
+    margin:0 auto;
+    padding:64px 24px;
+  }
+  .section-head{
+    margin-bottom:32px;
+  }
+  .eyebrow{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--blue-dark); font-weight:700; margin-bottom:8px;
+  }
+  .section-head h2{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:28px;
+    letter-spacing:-.01em;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:20px;
+  }
+  .app-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    position:relative;
+  }
+  .app-shot{
+    width:100%;
+    aspect-ratio:16/10;
+    border-radius:12px;
+    overflow:hidden;
+    background:#0E1220;
+    margin-bottom:2px;
+  }
+  .app-shot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:top;
+    transition:transform .4s ease;
+  }
+  .app-card:hover .app-shot img{ transform:scale(1.04); }
+  .app-top-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .app-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 40px rgba(14,18,32,0.10);
+    border-color:transparent;
+  }
+  .app-icon{
+    width:52px; height:52px;
+    border-radius:15px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:24px;
+    color:#fff;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15);
+    overflow:hidden;
+  }
+  .app-icon img{
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .dock-icon img{
+    width:100%; height:100%;
+    object-fit:cover;
+    border-radius:13px;
+  }
+  .app-card h3{
+    font-size:18px;
+    font-weight:700;
+  }
+  .app-card p{
+    font-size:13.5px;
+    color:var(--muted);
+    flex-grow:1;
+  }
+  .app-status{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    width:fit-content;
+    padding:4px 10px;
+    border-radius:100px;
+  }
+  .status-live{ background:#E7F6EC; color:#1B7A3E; }
+  .status-testing{ background:#FFF3E0; color:#B4590A; }
+  .app-link{
+    font-size:13px; font-weight:700; color:var(--blue-dark);
+    display:flex; align-items:center; gap:6px;
+    margin-top:2px;
+  }
+  .app-card:hover .app-link{ text-decoration:underline; }
+
+  /* icon colors matching each app's real identity */
+  .ic-piping{ background:linear-gradient(135deg,#F97A2A,#7C3AED); }
+  .ic-html{ background:linear-gradient(135deg,#2B6CF6,#1741A6); }
+  .ic-calendar{ background:linear-gradient(135deg,#8B2E2E,#C9971F); }
+  .ic-scanner{ background:linear-gradient(135deg,#1B1B1B,#8FE100); }
+  .ic-dawa{ background:linear-gradient(135deg,#0E9E8E,#0B7A6E); }
+  .ic-kruvi{ background:linear-gradient(135deg,#6D28D9,#DB2777); }
+
+  /* ---- ABOUT ---- */
+  .about{
+    background:var(--card);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .about-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:56px 24px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+  @media(min-width:760px){
+    .about-inner{ grid-template-columns:1.1fr 1fr; align-items:center; }
+  }
+  .about h2{
+    font-family:Georgia, serif;
+    font-size:26px;
+    margin-bottom:14px;
+  }
+  .about p{
+    color:var(--muted);
+    font-size:14.5px;
+    max-width:520px;
+  }
+  .about-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .stat{
+    background:var(--paper);
+    border-radius:14px;
+    padding:18px 14px;
+    text-align:center;
+  }
+  .stat .num{
+    font-family:Georgia, serif;
+    font-size:24px;
+    font-weight:700;
+    background:linear-gradient(100deg, var(--blue), var(--orange));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .stat .lbl{
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    margin-top:4px;
+  }
+
+  /* ---- FOOTER ---- */
+  footer{
+    padding:40px 24px 60px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+  }
+  footer .foot-logo{
+    font-weight:800;
+    color:var(--ink);
+    margin-bottom:6px;
+    font-size:15px;
+    letter-spacing:.01em;
+  }
+  footer a{ color:var(--blue-dark); text-decoration:none; font-weight:600; }
+
+  @media(max-width:480px){
+    h1{ font-size:32px; }
+    .hero{ padding:48px 18px 44px; }
+    .section{ padding:48px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="dock-row" aria-hidden="true">
+    <div class="dock-icon ic-piping"><img src="icons/icon-piping.png" alt=""></div>
+    <div class="dock-icon ic-html"><img src="icons/icon-htmlviewer.png" alt=""></div>
+    <div class="dock-icon ic-calendar"><img src="icons/icon-calendar.png" alt=""></div>
+    <div class="dock-icon ic-scanner"><img src="icons/icon-scanner.jpg" alt=""></div>
+    <div class="dock-icon ic-dawa"><img src="icons/icon-dawa.jpg" alt=""></div>
+    <div class="dock-icon ic-kruvi"><img src="icons/icon-kruvi.png" alt=""></div>
+  </div>
+  <div class="hero-inner">
+    <div class="badge"><span class="dot"></span> Built by an engineer, for everyday use</div>
+    <h1>Smart apps for <em>real life</em>, made simple.</h1>
+    <p>JMR Apps is a growing suite of small, focused tools — from a Tamil panchangam to a piping calculator — each built to do one job well.</p>
+    <div class="hero-cta">
+      <a href="#apps" class="btn btn-primary">Explore the apps →</a>
+      <a href="#about" class="btn btn-ghost">About JMR</a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="apps">
+  <div class="section-head">
+    <div class="eyebrow">The Suite</div>
+    <h2>Six tools, one home</h2>
+  </div>
+  <div class="grid">
+
+    <a href="https://muthurajjeyabal.github.io/Piping-calculator-/" class="app-card" target="_blank" rel="noopener">
+      <div class="app-shot"><img src="screenshots/shot-piping.jpg" alt="MU Piping Calculator screenshot"></div>
+      <div class="app-top-row">
+        <div class="app-icon ic-piping"><img src="icons/icon-piping.png" alt="MU Piping Calculator icon"></div>
+        <span class="app-status status-testing">Closed testing</span>
+      </div>
+      <h3>MU Piping Calculator</h3>
+      <p>Pipe weight, volume, schedule, elbows, mitre bends, rolling offsets, and flange data — fast and professional.</p>
+      <span class="app-link">Open app →</span>
+    </a>
+
+    <a href="https://muthurajjeyabal.github.io/Muthu-TamilCalender/" class="app-card" target="_blank" rel="noopener">
+      <div class="app-shot"><img src="screenshots/shot-calendar.jpg" alt="Muthu Tamil Calendar screenshot"></div>
+      <div class="app-top-row">
+        <div class="app-icon ic-calendar"><img src="icons/icon-calendar.png" alt="Muthu Tamil Calendar icon"></div>
+        <span class="app-status status-live">Live</span>
+      </div>
+      <h3>முத்து தமிழ் காலண்டர்</h3>
+      <p>Daily panchangam, rasi palan, muhurtham dates, and an AI astrologer — styled like a traditional wall calendar.</p>
+      <span class="app-link">Open app →</span>
+    </a>
+
+    <a href="https://ingredient-scanner-teal.vercel.app" class="app-card" target="_blank" rel="noopener">
+      <div class="app-shot"><img src="screenshots/shot-scanner.jpg" alt="Insider Ingredient Scanner screenshot"></div>
+      <div class="app-top-row">
+        <div class="app-icon ic-scanner"><img src="icons/icon-scanner.jpg" alt="Insider Ingredient Scanner icon"></div>
+        <span class="app-status status-live">Live</span>
+      </div>
+      <h3>Insider — Ingredient Scanner</h3>
+      <p>Scan any Indian food, cosmetic, or personal care label to see exactly what's inside — ingredients, chemicals, calories.</p>
+      <span class="app-link">Open app →</span>
+    </a>
+
+    <a href="https://muthurajjeyabal.github.io/Dawa-info/" class="app-card" target="_blank" rel="noopener">
+      <div class="app-shot"><img src="screenshots/shot-dawa.jpg" alt="Dawa Info screenshot"></div>
+      <div class="app-top-row">
+        <div class="app-icon ic-dawa"><img src="icons/icon-dawa.jpg" alt="Dawa Info icon"></div>
+        <span class="app-status status-live">Live</span>
+      </div>
+      <h3>Dawa Info</h3>
+      <p>Search 240,000+ medicines offline — compare, track reminders, and keep a personal shelf of what you take.</p>
+      <span class="app-link">Open app →</span>
+    </a>
+
+    <a href="https://muthurajjeyabal.github.io/Html-viewer-/" class="app-card" target="_blank" rel="noopener">
+      <div class="app-shot"><img src="screenshots/shot-html.jpg" alt="HTML Viewer screenshot"></div>
+      <div class="app-top-row">
+        <div class="app-icon ic-html"><img src="icons/icon-htmlviewer.png" alt="HTML Viewer icon"></div>
+        <span class="app-status status-live">Live</span>
+      </div>
+      <h3>HTML Viewer</h3>
+      <p>Open, edit, and preview HTML files or full folders — with CSS, JS, and images — right on your phone.</p>
+      <span class="app-link">Open app →</span>
+    </a>
+
+    <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" class="app-card" target="_blank" rel="noopener">
+      <div class="app-shot"><img src="screenshots/shot-kruvi.jpg" alt="Kruvi Tools screenshot"></div>
+      <div class="app-top-row">
+        <div class="app-icon ic-kruvi"><img src="icons/icon-kruvi.png" alt="Kruvi Tools icon"></div>
+        <span class="app-status status-live">Live</span>
+      </div>
+      <h3>Kruvi Tools</h3>
+      <p>100+ free everyday utilities — PDF, image, text, calculator, developer, and QR tools. No sign-up, no install.</p>
+      <span class="app-link">Open app →</span>
+    </a>
+
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <h2>Built between crane lifts and code.</h2>
+      <p>JMR Apps is made by Muthuraj — a senior crane operator and LEEA Appointed Person with 20+ years in lifting engineering, who taught himself app development to solve everyday problems he kept running into: understanding what's in a product, tracking medicines, checking pipe specs on site, keeping the Tamil calendar close by. Every app here is small, offline-friendly where possible, and built to actually be used.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat"><div class="num">6</div><div class="lbl">Apps live</div></div>
+      <div class="stat"><div class="num">240K+</div><div class="lbl">Medicines indexed</div></div>
+      <div class="stat"><div class="num">100+</div><div class="lbl">Free tools</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">JMR Apps</div>
+  <div>Smart Apps · Better Life</div>
+  <div style="margin-top:10px;">Lifting engineering software → <a href="https://jmrlifting.com" target="_blank" rel="noopener">jmrlifting.com</a></div>
+</footer>
+
+</body>
+</html>
