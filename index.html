@@ -4,369 +4,368 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JMR Apps — Smart Apps, Better Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Tamil:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0E1220;
-    --paper:#F6F5F2;
-    --card:#FFFFFF;
-    --blue:#2B6CF6;
-    --blue-dark:#1741A6;
-    --orange:#F97A2A;
-    --muted:#6B7280;
-    --line:#E7E5E0;
+    --navy:#0B1E33;
+    --navy-deep:#081729;
+    --grid:#1E3A5C;
+    --cyan:#7FD4E8;
+    --cyan-dim:#3E7A94;
+    --brass:#C98A3E;
+    --hazard:#E8622C;
+    --paper:#F4F0E6;
+    --ink:#0E1A24;
+    --ink-soft:#4A5A68;
+    --line:#D9D2C0;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:'Segoe UI', -apple-system, 'Helvetica Neue', Arial, sans-serif;
-    line-height:1.5;
+    font-family:'IBM Plex Sans', -apple-system, sans-serif;
+    line-height:1.55;
   }
-  @font-face{
-    font-family:'Display';
-    src:local('Georgia');
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
   }
 
-  /* ---- HERO ---- */
+  :focus-visible{ outline:2px solid var(--hazard); outline-offset:2px; }
+
+  /* ---- NAV ---- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,30,51,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--grid);
+    padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-brand{
+    color:var(--cyan);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .nav-brand span{ color:var(--brass); }
+  .nav-links{ display:flex; gap:22px; }
+  .nav-links a{
+    color:#B9CEDD;
+    text-decoration:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{ color:var(--cyan); }
+  @media(max-width:560px){ .nav-links{ display:none; } }
+
+  /* ---- HERO — blueprint sheet ---- */
   .hero{
-    background:
-      radial-gradient(circle at 15% 20%, rgba(43,108,246,0.35), transparent 45%),
-      radial-gradient(circle at 85% 15%, rgba(249,122,42,0.30), transparent 45%),
-      linear-gradient(160deg, #0E1220 0%, #161B2E 60%, #10142A 100%);
-    color:#fff;
-    padding:64px 24px 56px;
     position:relative;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    background-size:32px 32px, 32px 32px, cover;
+    color:#fff;
+    padding:72px 24px 90px;
     overflow:hidden;
   }
-  .dock-row{
-    display:flex;
-    justify-content:center;
-    gap:14px;
-    margin-bottom:38px;
-    flex-wrap:wrap;
-    opacity:0;
-    animation:riseIn .8s ease forwards;
-    animation-delay:.15s;
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 50% 0%, rgba(127,212,232,0.14), transparent 55%);
+    pointer-events:none;
   }
-  .dock-icon{
-    width:46px; height:46px;
-    border-radius:13px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.35);
-    transform:translateY(0);
-    transition:transform .35s ease;
+  .hero-inner{ max-width:900px; margin:0 auto; position:relative; }
+
+  .stamp{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--cyan);
+    border:1px solid var(--cyan-dim);
+    padding:7px 14px;
+    margin-bottom:28px;
+    opacity:0; animation:riseIn .7s ease forwards; animation-delay:.05s;
   }
-  .dock-icon:hover{ transform:translateY(-6px); }
-  .hero-inner{
-    max-width:720px;
-    margin:0 auto;
-    text-align:center;
-  }
-  .badge{
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-    color:#B9C2E0;
-    border:1px solid rgba(255,255,255,0.18);
-    padding:6px 14px; border-radius:100px;
-    margin-bottom:22px;
-    opacity:0;
-    animation:riseIn .7s ease forwards;
-    animation-delay:.05s;
-  }
-  .badge .dot{ width:6px; height:6px; border-radius:50%; background:var(--orange); }
+  .stamp .sq{ width:6px; height:6px; background:var(--hazard); }
+
   h1{
-    font-family:Georgia, 'Times New Roman', serif;
-    font-size:44px;
-    line-height:1.12;
+    font-family:'IBM Plex Mono', monospace;
     font-weight:700;
+    font-size:clamp(32px, 6vw, 56px);
+    line-height:1.08;
     letter-spacing:-.01em;
-    margin-bottom:16px;
-    opacity:0;
-    animation:riseIn .8s ease forwards;
-    animation-delay:.2s;
+    text-transform:uppercase;
+    margin-bottom:22px;
+    max-width:820px;
+    opacity:0; animation:riseIn .8s ease forwards; animation-delay:.15s;
   }
   h1 em{
     font-style:normal;
-    background:linear-gradient(100deg, #7CA6FF, var(--orange));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    color:var(--brass);
   }
   .hero p{
-    font-size:16px;
-    color:#B9C2E0;
-    max-width:480px;
-    margin:0 auto 30px;
-    opacity:0;
-    animation:riseIn .8s ease forwards;
-    animation-delay:.3s;
+    font-size:17px;
+    color:#C3D2DD;
+    max-width:520px;
+    margin-bottom:36px;
+    opacity:0; animation:riseIn .8s ease forwards; animation-delay:.28s;
   }
   .hero-cta{
-    display:inline-flex;
-    gap:12px;
-    flex-wrap:wrap;
-    justify-content:center;
-    opacity:0;
-    animation:riseIn .8s ease forwards;
-    animation-delay:.4s;
+    display:flex; gap:14px; flex-wrap:wrap;
+    opacity:0; animation:riseIn .8s ease forwards; animation-delay:.4s;
   }
   .btn{
     display:inline-flex; align-items:center; gap:8px;
-    padding:12px 22px;
-    border-radius:100px;
-    font-size:14px; font-weight:600;
+    padding:13px 24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
     text-decoration:none;
-    transition:transform .2s ease, box-shadow .2s ease;
+    transition:transform .2s ease, background .2s ease;
+    border:1px solid transparent;
   }
-  .btn-primary{
-    background:linear-gradient(100deg, var(--blue), var(--orange));
-    color:#fff;
-    box-shadow:0 10px 24px rgba(43,108,246,0.35);
-  }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(43,108,246,0.45); }
-  .btn-ghost{
-    border:1px solid rgba(255,255,255,0.25);
-    color:#fff;
-  }
-  .btn-ghost:hover{ background:rgba(255,255,255,0.08); }
+  .btn-primary{ background:var(--hazard); color:#fff; }
+  .btn-primary:hover{ transform:translateY(-2px); background:#D6551F; }
+  .btn-ghost{ border-color:var(--cyan-dim); color:var(--cyan); }
+  .btn-ghost:hover{ border-color:var(--cyan); background:rgba(127,212,232,0.08); }
 
-  @keyframes riseIn{
-    from{ opacity:0; transform:translateY(14px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
 
-  /* ---- APP GRID ---- */
-  .section{
-    max-width:1080px;
-    margin:0 auto;
-    padding:64px 24px;
+  /* parts diagram row */
+  .parts-row{
+    margin-top:60px;
+    display:flex; justify-content:center; gap:0; flex-wrap:wrap;
+    position:relative;
+    opacity:0; animation:riseIn .9s ease forwards; animation-delay:.5s;
   }
-  .section-head{
-    margin-bottom:32px;
-  }
-  .eyebrow{
-    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--blue-dark); font-weight:700; margin-bottom:8px;
-  }
-  .section-head h2{
-    font-family:Georgia, 'Times New Roman', serif;
-    font-size:28px;
-    letter-spacing:-.01em;
-  }
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-    gap:20px;
-  }
-  .app-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:24px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    text-decoration:none;
-    color:var(--ink);
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  .part{
+    display:flex; flex-direction:column; align-items:center;
+    padding:0 18px;
     position:relative;
   }
-  .app-shot{
-    width:100%;
-    aspect-ratio:16/10;
-    border-radius:12px;
-    overflow:hidden;
-    background:#0E1220;
-    margin-bottom:2px;
+  .part:not(:last-child)::after{
+    content:"";
+    position:absolute; top:26px; right:-2px;
+    width:22px; height:1px;
+    background:var(--cyan-dim);
   }
-  .app-shot img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:top;
-    transition:transform .4s ease;
-  }
-  .app-card:hover .app-shot img{ transform:scale(1.04); }
-  .app-top-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-  }
-  .app-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 20px 40px rgba(14,18,32,0.10);
-    border-color:transparent;
-  }
-  .app-icon{
+  .part-icon{
     width:52px; height:52px;
-    border-radius:15px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:24px;
-    color:#fff;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15);
+    border:1px solid var(--cyan-dim);
     overflow:hidden;
+    transition:border-color .25s ease, transform .25s ease;
   }
-  .app-icon img{
-    width:100%; height:100%;
-    object-fit:cover;
+  .part-icon img{ width:100%; height:100%; object-fit:cover; }
+  .part:hover .part-icon{ border-color:var(--cyan); transform:translateY(-3px); }
+  .part-tag{
+    margin-top:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px; letter-spacing:.08em;
+    color:var(--cyan-dim);
   }
-  .dock-icon img{
-    width:100%; height:100%;
-    object-fit:cover;
-    border-radius:13px;
+  @media(max-width:640px){
+    .part{ padding:10px 14px; }
+    .part:not(:last-child)::after{ display:none; }
   }
-  .app-card h3{
-    font-size:18px;
-    font-weight:700;
+
+  /* ---- REVEAL ---- */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---- SECTION ---- */
+  .section{ max-width:1100px; margin:0 auto; padding:80px 24px; }
+  .sec-head{ margin-bottom:40px; display:flex; align-items:baseline; gap:16px; }
+  .sec-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--brass); font-weight:600;
   }
-  .app-card p{
-    font-size:13.5px;
-    color:var(--muted);
-    flex-grow:1;
-  }
-  .app-status{
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:.06em;
+  .sec-head h2{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:clamp(22px,3.2vw,30px);
     text-transform:uppercase;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    width:fit-content;
-    padding:4px 10px;
-    border-radius:100px;
+    letter-spacing:-.01em;
   }
-  .status-live{ background:#E7F6EC; color:#1B7A3E; }
-  .status-testing{ background:#FFF3E0; color:#B4590A; }
+  .sec-rule{ flex:1; height:1px; background:var(--line); align-self:center; }
+
+  /* ---- APP GRID — schematic cards ---- */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:26px; }
+  .app-card{
+    position:relative;
+    background:#fff;
+    border:1px solid var(--line);
+    padding:22px;
+    text-decoration:none;
+    color:var(--ink);
+    display:flex; flex-direction:column; gap:14px;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .app-card:hover{ transform:translateY(-5px); box-shadow:0 18px 36px rgba(14,26,36,0.12); }
+  /* corner brackets */
+  .app-card::before, .app-card::after,
+  .corner-br, .corner-bl{
+    content:""; position:absolute; width:14px; height:14px;
+    border-color:var(--brass); border-style:solid; border-width:0;
+    opacity:0; transition:opacity .25s ease;
+  }
+  .app-card::before{ top:-1px; left:-1px; border-top-width:2px; border-left-width:2px; }
+  .app-card::after{ top:-1px; right:-1px; border-top-width:2px; border-right-width:2px; }
+  .app-card:hover::before, .app-card:hover::after{ opacity:1; }
+
+  .app-shot{ width:100%; aspect-ratio:16/10; overflow:hidden; background:var(--navy); border:1px solid var(--line); }
+  .app-shot img{ width:100%; height:100%; object-fit:cover; object-position:top; transition:transform .5s ease; }
+  .app-card:hover .app-shot img{ transform:scale(1.05); }
+
+  .app-top-row{ display:flex; align-items:center; justify-content:space-between; }
+  .app-icon{ width:44px; height:44px; overflow:hidden; border:1px solid var(--line); }
+  .app-icon img{ width:100%; height:100%; object-fit:cover; }
+
+  .app-status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 9px;
+  }
+  .status-live{ background:#E4F2E7; color:#1D6B3B; border:1px solid #B9DEC2; }
+  .status-testing{ background:#FBEADC; color:#B0521A; border:1px solid #F0C79E; }
+
+  .app-card h3{
+    font-family:'IBM Plex Sans Tamil', 'IBM Plex Sans', sans-serif;
+    font-size:17px; font-weight:700;
+  }
+  .app-card p{ font-size:13.5px; color:var(--ink-soft); flex-grow:1; }
   .app-link{
-    font-size:13px; font-weight:700; color:var(--blue-dark);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--hazard);
     display:flex; align-items:center; gap:6px;
-    margin-top:2px;
   }
   .app-card:hover .app-link{ text-decoration:underline; }
 
-  /* icon colors matching each app's real identity */
-  .ic-piping{ background:linear-gradient(135deg,#F97A2A,#7C3AED); }
-  .ic-html{ background:linear-gradient(135deg,#2B6CF6,#1741A6); }
-  .ic-calendar{ background:linear-gradient(135deg,#8B2E2E,#C9971F); }
-  .ic-scanner{ background:linear-gradient(135deg,#1B1B1B,#8FE100); }
-  .ic-dawa{ background:linear-gradient(135deg,#0E9E8E,#0B7A6E); }
-  .ic-kruvi{ background:linear-gradient(135deg,#6D28D9,#DB2777); }
-
-  /* ---- ABOUT ---- */
-  .about{
-    background:var(--card);
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
+  /* ---- ABOUT — split with title block flavor ---- */
+  .about{ background:var(--navy); color:#fff; }
+  .about .section{ display:grid; grid-template-columns:1fr; gap:36px; padding-top:70px; padding-bottom:70px; }
+  @media(min-width:780px){ .about .section{ grid-template-columns:1.15fr 1fr; align-items:center; } }
+  .about h2{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:clamp(22px,3vw,28px);
+    text-transform:uppercase;
+    margin-bottom:16px;
+    color:var(--cyan);
   }
-  .about-inner{
-    max-width:1080px;
-    margin:0 auto;
-    padding:56px 24px;
+  .about p{ color:#C3D2DD; font-size:15px; max-width:540px; }
+
+  .specs{ border:1px solid var(--grid); }
+  .spec-row{
+    display:flex; justify-content:space-between;
+    padding:14px 18px;
+    border-bottom:1px solid var(--grid);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+  }
+  .spec-row:last-child{ border-bottom:none; }
+  .spec-k{ color:#7C93A6; letter-spacing:.06em; text-transform:uppercase; }
+  .spec-v{ color:var(--brass); font-weight:600; }
+
+  /* ---- TITLE BLOCK FOOTER (signature) ---- */
+  footer{ background:var(--paper); border-top:2px solid var(--ink); }
+  .titleblock{
+    max-width:1100px; margin:0 auto;
+    padding:0 24px 40px;
+  }
+  .tb-grid{
     display:grid;
     grid-template-columns:1fr;
-    gap:28px;
+    border:1px solid var(--ink);
+    margin-top:0;
   }
-  @media(min-width:760px){
-    .about-inner{ grid-template-columns:1.1fr 1fr; align-items:center; }
+  @media(min-width:700px){ .tb-grid{ grid-template-columns:repeat(4, 1fr); } }
+  .tb-cell{
+    border-right:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding:14px 16px;
   }
-  .about h2{
-    font-family:Georgia, serif;
-    font-size:26px;
-    margin-bottom:14px;
+  .tb-cell:last-child{ border-right:none; }
+  @media(max-width:699px){ .tb-cell{ border-right:none; } }
+  .tb-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:5px;
   }
-  .about p{
-    color:var(--muted);
-    font-size:14.5px;
-    max-width:520px;
+  .tb-value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; font-weight:600; color:var(--ink);
   }
-  .about-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
+  .tb-title{
+    grid-column:1/-1;
+    padding:16px;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    border-bottom:1px solid var(--ink);
   }
-  .stat{
-    background:var(--paper);
-    border-radius:14px;
-    padding:18px 14px;
-    text-align:center;
+  .tb-brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px; font-weight:700; letter-spacing:.04em;
   }
-  .stat .num{
-    font-family:Georgia, serif;
-    font-size:24px;
-    font-weight:700;
-    background:linear-gradient(100deg, var(--blue), var(--orange));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-  .stat .lbl{
-    font-size:11px;
-    color:var(--muted);
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    margin-top:4px;
-  }
-
-  /* ---- FOOTER ---- */
-  footer{
-    padding:40px 24px 60px;
-    text-align:center;
-    color:var(--muted);
-    font-size:13px;
-  }
-  footer .foot-logo{
-    font-weight:800;
-    color:var(--ink);
-    margin-bottom:6px;
-    font-size:15px;
-    letter-spacing:.01em;
-  }
-  footer a{ color:var(--blue-dark); text-decoration:none; font-weight:600; }
-
-  @media(max-width:480px){
-    h1{ font-size:32px; }
-    .hero{ padding:48px 18px 44px; }
-    .section{ padding:48px 18px; }
-  }
+  .tb-brand span{ color:var(--hazard); }
+  .tb-tagline{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); }
+  .tb-links{ padding:16px; grid-column:1/-1; display:flex; gap:20px; flex-wrap:wrap; }
+  .tb-links a{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--hazard); text-decoration:none; letter-spacing:.04em; }
+  .tb-links a:hover{ text-decoration:underline; }
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="dock-row" aria-hidden="true">
-    <div class="dock-icon ic-piping"><img src="icons/icon-piping.png" alt=""></div>
-    <div class="dock-icon ic-html"><img src="icons/icon-htmlviewer.png" alt=""></div>
-    <div class="dock-icon ic-calendar"><img src="icons/icon-calendar.png" alt=""></div>
-    <div class="dock-icon ic-scanner"><img src="icons/icon-scanner.jpg" alt=""></div>
-    <div class="dock-icon ic-dawa"><img src="icons/icon-dawa.jpg" alt=""></div>
-    <div class="dock-icon ic-kruvi"><img src="icons/icon-kruvi.png" alt=""></div>
+<nav>
+  <div class="nav-brand">JMR <span>Apps</span></div>
+  <div class="nav-links">
+    <a href="#apps">Apps</a>
+    <a href="#about">About</a>
+    <a href="https://jmrlifting.com" target="_blank" rel="noopener">JMR Lifting</a>
   </div>
+</nav>
+
+<header class="hero">
   <div class="hero-inner">
-    <div class="badge"><span class="dot"></span> Built by an engineer, for everyday use</div>
-    <h1>Smart apps for <em>real life</em>, made simple.</h1>
-    <p>JMR Apps is a growing suite of small, focused tools — from a Tamil panchangam to a piping calculator — each built to do one job well.</p>
+    <div class="stamp"><span class="sq"></span> Field-tested · Built by an engineer</div>
+    <h1>Smart apps for <em>real life</em>,<br>engineered simple.</h1>
+    <p>A growing suite of small, focused tools — from a Tamil panchangam to a piping calculator — each built to do one job well and do it reliably.</p>
     <div class="hero-cta">
-      <a href="#apps" class="btn btn-primary">Explore the apps →</a>
+      <a href="#apps" class="btn btn-primary">Explore the suite</a>
       <a href="#about" class="btn btn-ghost">About JMR</a>
+    </div>
+
+    <div class="parts-row">
+      <div class="part"><div class="part-icon"><img src="icons/icon-piping.png" alt=""></div><div class="part-tag">PIPING</div></div>
+      <div class="part"><div class="part-icon"><img src="icons/icon-calendar.png" alt=""></div><div class="part-tag">CALENDAR</div></div>
+      <div class="part"><div class="part-icon"><img src="icons/icon-scanner.jpg" alt=""></div><div class="part-tag">SCANNER</div></div>
+      <div class="part"><div class="part-icon"><img src="icons/icon-dawa.jpg" alt=""></div><div class="part-tag">MEDICINE</div></div>
+      <div class="part"><div class="part-icon"><img src="icons/icon-htmlviewer.png" alt=""></div><div class="part-tag">HTML</div></div>
+      <div class="part"><div class="part-icon"><img src="icons/icon-kruvi.png" alt=""></div><div class="part-tag">TOOLS</div></div>
     </div>
   </div>
 </header>
 
 <section class="section" id="apps">
-  <div class="section-head">
-    <div class="eyebrow">The Suite</div>
-    <h2>Six tools, one home</h2>
+  <div class="sec-head reveal">
+    <span class="sec-num">01</span>
+    <h2>The Suite</h2>
+    <span class="sec-rule"></span>
   </div>
   <div class="grid">
 
-    <a href="https://muthurajjeyabal.github.io/Piping-calculator-/" class="app-card" target="_blank" rel="noopener">
+    <a href="https://muthurajjeyabal.github.io/Piping-calculator-/" class="app-card reveal" target="_blank" rel="noopener">
       <div class="app-shot"><img src="screenshots/shot-piping.jpg" alt="MU Piping Calculator screenshot"></div>
       <div class="app-top-row">
-        <div class="app-icon ic-piping"><img src="icons/icon-piping.png" alt="MU Piping Calculator icon"></div>
+        <div class="app-icon"><img src="icons/icon-piping.png" alt=""></div>
         <span class="app-status status-testing">Closed testing</span>
       </div>
       <h3>MU Piping Calculator</h3>
@@ -374,10 +373,10 @@
       <span class="app-link">Open app →</span>
     </a>
 
-    <a href="https://muthurajjeyabal.github.io/Muthu-TamilCalender/" class="app-card" target="_blank" rel="noopener">
+    <a href="https://muthurajjeyabal.github.io/Muthu-TamilCalender/" class="app-card reveal" target="_blank" rel="noopener">
       <div class="app-shot"><img src="screenshots/shot-calendar.jpg" alt="Muthu Tamil Calendar screenshot"></div>
       <div class="app-top-row">
-        <div class="app-icon ic-calendar"><img src="icons/icon-calendar.png" alt="Muthu Tamil Calendar icon"></div>
+        <div class="app-icon"><img src="icons/icon-calendar.png" alt=""></div>
         <span class="app-status status-live">Live</span>
       </div>
       <h3>முத்து தமிழ் காலண்டர்</h3>
@@ -385,10 +384,10 @@
       <span class="app-link">Open app →</span>
     </a>
 
-    <a href="https://ingredient-scanner-teal.vercel.app" class="app-card" target="_blank" rel="noopener">
+    <a href="https://ingredient-scanner-teal.vercel.app" class="app-card reveal" target="_blank" rel="noopener">
       <div class="app-shot"><img src="screenshots/shot-scanner.jpg" alt="Insider Ingredient Scanner screenshot"></div>
       <div class="app-top-row">
-        <div class="app-icon ic-scanner"><img src="icons/icon-scanner.jpg" alt="Insider Ingredient Scanner icon"></div>
+        <div class="app-icon"><img src="icons/icon-scanner.jpg" alt=""></div>
         <span class="app-status status-live">Live</span>
       </div>
       <h3>Insider — Ingredient Scanner</h3>
@@ -396,10 +395,10 @@
       <span class="app-link">Open app →</span>
     </a>
 
-    <a href="https://muthurajjeyabal.github.io/Dawa-info/" class="app-card" target="_blank" rel="noopener">
+    <a href="https://muthurajjeyabal.github.io/Dawa-info/" class="app-card reveal" target="_blank" rel="noopener">
       <div class="app-shot"><img src="screenshots/shot-dawa.jpg" alt="Dawa Info screenshot"></div>
       <div class="app-top-row">
-        <div class="app-icon ic-dawa"><img src="icons/icon-dawa.jpg" alt="Dawa Info icon"></div>
+        <div class="app-icon"><img src="icons/icon-dawa.jpg" alt=""></div>
         <span class="app-status status-live">Live</span>
       </div>
       <h3>Dawa Info</h3>
@@ -407,10 +406,10 @@
       <span class="app-link">Open app →</span>
     </a>
 
-    <a href="https://muthurajjeyabal.github.io/Html-viewer-/" class="app-card" target="_blank" rel="noopener">
+    <a href="https://muthurajjeyabal.github.io/Html-viewer-/" class="app-card reveal" target="_blank" rel="noopener">
       <div class="app-shot"><img src="screenshots/shot-html.jpg" alt="HTML Viewer screenshot"></div>
       <div class="app-top-row">
-        <div class="app-icon ic-html"><img src="icons/icon-htmlviewer.png" alt="HTML Viewer icon"></div>
+        <div class="app-icon"><img src="icons/icon-htmlviewer.png" alt=""></div>
         <span class="app-status status-live">Live</span>
       </div>
       <h3>HTML Viewer</h3>
@@ -418,10 +417,10 @@
       <span class="app-link">Open app →</span>
     </a>
 
-    <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" class="app-card" target="_blank" rel="noopener">
+    <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" class="app-card reveal" target="_blank" rel="noopener">
       <div class="app-shot"><img src="screenshots/shot-kruvi.jpg" alt="Kruvi Tools screenshot"></div>
       <div class="app-top-row">
-        <div class="app-icon ic-kruvi"><img src="icons/icon-kruvi.png" alt="Kruvi Tools icon"></div>
+        <div class="app-icon"><img src="icons/icon-kruvi.png" alt=""></div>
         <span class="app-status status-live">Live</span>
       </div>
       <h3>Kruvi Tools</h3>
@@ -433,24 +432,44 @@
 </section>
 
 <section class="about" id="about">
-  <div class="about-inner">
-    <div>
+  <div class="section">
+    <div class="reveal">
       <h2>Built between crane lifts and code.</h2>
       <p>JMR Apps is made by Muthuraj — a senior crane operator and LEEA Appointed Person with 20+ years in lifting engineering, who taught himself app development to solve everyday problems he kept running into: understanding what's in a product, tracking medicines, checking pipe specs on site, keeping the Tamil calendar close by. Every app here is small, offline-friendly where possible, and built to actually be used.</p>
     </div>
-    <div class="about-stats">
-      <div class="stat"><div class="num">6</div><div class="lbl">Apps live</div></div>
-      <div class="stat"><div class="num">240K+</div><div class="lbl">Medicines indexed</div></div>
-      <div class="stat"><div class="num">100+</div><div class="lbl">Free tools</div></div>
+    <div class="specs reveal">
+      <div class="spec-row"><span class="spec-k">Apps live</span><span class="spec-v">6</span></div>
+      <div class="spec-row"><span class="spec-k">Medicines indexed</span><span class="spec-v">240,000+</span></div>
+      <div class="spec-row"><span class="spec-k">Free tools</span><span class="spec-v">100+</span></div>
+      <div class="spec-row"><span class="spec-k">Built by</span><span class="spec-v">1 engineer</span></div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="foot-logo">JMR Apps</div>
-  <div>Smart Apps · Better Life</div>
-  <div style="margin-top:10px;">Lifting engineering software → <a href="https://jmrlifting.com" target="_blank" rel="noopener">jmrlifting.com</a></div>
+  <div class="titleblock">
+    <div class="tb-grid">
+      <div class="tb-title">
+        <div class="tb-brand">JMR <span>APPS</span></div>
+        <div class="tb-tagline">SMART APPS · BETTER LIFE</div>
+      </div>
+      <div class="tb-cell"><div class="tb-label">Drawn by</div><div class="tb-value">Muthuraj</div></div>
+      <div class="tb-cell"><div class="tb-label">Sheet</div><div class="tb-value">01 of 06</div></div>
+      <div class="tb-cell"><div class="tb-label">Status</div><div class="tb-value">In service</div></div>
+      <div class="tb-cell"><div class="tb-label">Rev</div><div class="tb-value">2026</div></div>
+      <div class="tb-links">
+        <a href="https://jmrlifting.com" target="_blank" rel="noopener">jmrlifting.com — lifting engineering software</a>
+      </div>
+    </div>
+  </div>
 </footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 
 </body>
 </html>
