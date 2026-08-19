@@ -253,7 +253,34 @@
   }
   .app-card:hover .app-link{ text-decoration:underline; }
 
-  /* ---- ABOUT — split with title block flavor ---- */
+  .biz-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:26px; }
+  .biz-card{
+    background:var(--navy);
+    color:#fff;
+    border:1px solid var(--grid);
+    padding:28px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .biz-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--brass);
+    border:1px solid var(--brass);
+    padding:4px 10px;
+    width:fit-content;
+  }
+  .biz-card h3{ font-size:19px; font-weight:700; }
+  .biz-card p{ font-size:13.5px; color:#B9CEDD; }
+  .biz-links{ display:flex; gap:12px; flex-wrap:wrap; margin-top:6px; }
+  .biz-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--cyan);
+    text-decoration:none;
+    border-bottom:1px solid var(--cyan-dim);
+    padding-bottom:2px;
+  }
+  .biz-links a:hover{ border-color:var(--cyan); }
   .about{ background:var(--navy); color:#fff; }
   .about .section{ display:grid; grid-template-columns:1fr; gap:36px; padding-top:70px; padding-bottom:70px; }
   @media(min-width:780px){ .about .section{ grid-template-columns:1.15fr 1fr; align-items:center; } }
@@ -330,6 +357,7 @@
   <div class="nav-brand">JMR <span>Apps</span></div>
   <div class="nav-links">
     <a href="#apps">Apps</a>
+    <a href="#business">Business</a>
     <a href="#about">About</a>
     <a href="https://jmrlifting.com" target="_blank" rel="noopener">JMR Lifting</a>
   </div>
@@ -429,6 +457,39 @@
       <p>100+ free everyday utilities — PDF, image, text, calculator, developer, and QR tools. No sign-up, no install.</p>
       <span class="app-link">Open app →</span>
     </a>
+
+  </div>
+</section>
+
+<section class="section" id="business">
+  <div class="sec-head reveal">
+    <span class="sec-num">02</span>
+    <h2>Business Software</h2>
+    <span class="sec-rule"></span>
+  </div>
+  <div class="biz-grid">
+
+    <div class="biz-card reveal">
+      <span class="biz-tag">For cable operators</span>
+      <h3>Smart Cable Manager</h3>
+      <p>A full admin panel for cable TV operators — customers, collections, box stock, billing cycles, WhatsApp reminders, and reports, all in one place.</p>
+      <div class="biz-links">
+        <a href="https://muthurajjeyabal.github.io/smart-cable-manager/" target="_blank" rel="noopener">Open admin panel →</a>
+        <a href="https://muthurajjeyabal.github.io/smart-cable-manager/collector.html" target="_blank" rel="noopener">Collector app →</a>
+      </div>
+    </div>
+
+    <div class="biz-card reveal">
+      <span class="biz-tag">For hospitals &amp; clinics</span>
+      <h3>Smart Hospital Queue</h3>
+      <p>Live queue management for busy OPDs — reception, doctor, and patient views stay in sync with real tokens and smart ETA. No paper, no app install.</p>
+      <div class="biz-links">
+        <a href="https://www.smarthospitalqueue.com" target="_blank" rel="noopener">Visit site →</a>
+        <a href="https://app.smarthospitalqueue.com/reception.html" target="_blank" rel="noopener">Reception view →</a>
+        <a href="https://app.smarthospitalqueue.com/doctor.html" target="_blank" rel="noopener">Doctor view →</a>
+        <a href="https://app.smarthospitalqueue.com/patient.html" target="_blank" rel="noopener">Patient view →</a>
+      </div>
+    </div>
 
   </div>
 </section>
