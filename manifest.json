@@ -1,0 +1,12 @@
+{
+  "name": "JMR Apps",
+  "short_name": "JMR Apps",
+  "description": "JMR Apps builds smart, practical digital products and tools designed to solve real-world problems.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0A0F1E",
+  "theme_color": "#0A0F1E",
+  "icons": [
+    { "src": "assets/jmr-logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
