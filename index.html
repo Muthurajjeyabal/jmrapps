@@ -3,992 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JMR Apps | Smart Digital Solutions</title>
-<meta name="description" content="JMR Apps builds practical digital products for business, healthcare, productivity and everyday needs.">
-<meta property="og:title" content="JMR Apps | Smart Digital Solutions">
-<meta property="og:description" content="JMR Apps builds practical digital products for business, healthcare, productivity and everyday needs.">
+<title>JMR Apps | Practical software for operators and clinics</title>
+<meta name="description" content="JMR Apps builds operational software used in the field. Flagship product: Smart Queue for hospitals and clinics. Also the billing system behind a 2,000-subscriber cable network.">
+<meta property="og:title" content="JMR Apps">
+<meta property="og:description" content="Practical software for operators and clinics. Built by people who run the operation themselves.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jmrapps.com/">
 <meta property="og:image" content="https://jmrapps.com/assets/jmr-logo.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="JMR Apps | Smart Digital Solutions">
-<meta name="twitter:description" content="JMR Apps builds practical digital products for business, healthcare, productivity and everyday needs.">
-<meta name="twitter:image" content="https://jmrapps.com/assets/jmr-logo.png">
+<link rel="canonical" href="https://jmrapps.com/">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#0A0F1E;
-    --navy-2:#111A2E;
-    --paper:#FFFFFF;
-    --offwhite:#F6F7FA;
-    --ink:#0B1220;
-    --muted:#5B6472;
-    --line:#E7E9EE;
-    --accent:#4A63F6;
-    --accent-2:#FF7A45;
-    --live:#0F9D63;
-    --testing:#B0521A;
-    --soon:#7A8494;
+    --ink:#0C1220; --ink-2:#1B2436; --muted:#5C6574; --line:#E2E6EE;
+    --paper:#F7F6F2; --white:#FFFFFF; --navy:#0B1C3A; --navy-2:#12284F;
+    --gold:#C4A35A; --gold-2:#A6853A; --live:#1B7A4A;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter', -apple-system, sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block} a{color:inherit}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .wrap{width:min(1120px, calc(100% - 40px));margin:0 auto}
+  header{position:sticky;top:0;z-index:40;background:rgba(247,246,242,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .brand img{width:42px;height:42px;object-fit:contain}
+  .brand-name{font-weight:700;letter-spacing:.02em;font-size:15px}
+  .brand-sub{display:block;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+  nav.links{display:flex;align-items:center;gap:28px}
+  nav.links a{text-decoration:none;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+  nav.links a:hover{color:var(--gold-2)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;padding:11px 18px;border-radius:2px;border:1px solid transparent}
+  .btn-gold{background:var(--navy);color:#fff}
+  .btn-gold:hover{background:var(--navy-2)}
+  .btn-line{border-color:#c9c3b5;background:transparent;color:var(--ink)}
+  .btn-white{background:#fff;color:var(--navy)}
+  .burger{display:none;width:40px;height:40px;border:1px solid var(--line);background:#fff;cursor:pointer}
+  .burger span{display:block;width:16px;height:1.5px;background:var(--ink);margin:5px auto}
+  .mobile{display:none;position:fixed;inset:0;background:var(--paper);z-index:50;padding:24px}
+  .mobile.open{display:block}
+  .mobile a{display:block;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:650}
+  .hero{background:var(--navy);color:#fff;padding:88px 0 80px;position:relative;overflow:hidden}
+  .hero:after{content:"";position:absolute;right:-80px;top:-80px;width:420px;height:420px;border:1px solid rgba(196,163,90,.25);border-radius:50%}
+  .hero:before{content:"";position:absolute;right:40px;bottom:-140px;width:280px;height:280px;border:1px solid rgba(255,255,255,.08);border-radius:50%}
+  .kicker{color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:12px;font-weight:700;margin-bottom:18px}
+  .hero h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,5.4vw,64px);line-height:1.12;max-width:16ch}
+  .hero p.lead{margin-top:22px;max-width:38em;color:#C9D0DC;font-size:18px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+  .hero-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:64px;border-top:1px solid rgba(255,255,255,.12)}
+  .hero-meta div{padding:22px 20px 0 0}
+  .hero-meta strong{display:block;font-size:22px;font-weight:700}
+  .hero-meta span{display:block;color:#A8B2C3;font-size:13.5px;margin-top:4px}
+  section.block{padding:84px 0}
+  .h2{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(28px,3.5vw,42px);font-weight:400;line-height:1.2}
+  .lede{color:var(--muted);max-width:40em;margin-top:12px;font-size:17px}
+  .product{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .badge{display:inline-block;border:1px solid #d7c7a1;color:var(--gold-2);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;margin-bottom:14px}
+  .checks{margin-top:26px;display:grid;gap:12px}
+  .checks li{list-style:none;padding-left:22px;position:relative;color:var(--ink-2)}
+  .checks li:before{content:"";position:absolute;left:0;top:10px;width:8px;height:8px;background:var(--gold)}
+  .panel{background:var(--white);border:1px solid var(--line);padding:28px}
+  .panel h3{font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .queue{margin-top:18px;display:grid;gap:10px}
+  .q-row{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);padding:14px 16px;background:var(--paper)}
+  .q-row b{font-size:20px}
+  .q-row small{color:var(--muted);display:block;font-weight:500}
+  .now{border-color:#cfe4d6;background:#f3faf6}
+  .now b{color:var(--live)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px}
+  .rule{width:48px;height:2px;background:var(--gold);margin:18px 0}
+  .about-card{background:var(--white);border-left:3px solid var(--gold);padding:28px 26px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .muted-section{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .work{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+  .work a{text-decoration:none;border:1px solid var(--line);padding:22px 20px;background:var(--paper);min-height:150px;display:flex;flex-direction:column}
+  .work a:hover{border-color:#c9c3b5}
+  .work .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+  .work h3{margin:10px 0 8px;font-size:18px}
+  .work p{color:var(--muted);font-size:14.5px;flex:1}
+  .contact-box{background:var(--navy);color:#fff;padding:64px 48px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  .contact-box p{color:#C9D0DC;margin-top:12px}
+  .contact-links{display:grid;gap:10px}
+  .contact-links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;border:1px solid rgba(255,255,255,.14);padding:14px 16px;color:#fff}
+  .contact-links a:hover{border-color:var(--gold);color:var(--gold)}
+  .contact-links span{color:#A8B2C3;font-size:13px}
+  footer{padding:28px 0 40px;color:var(--muted);font-size:13.5px}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px}
+  @media (max-width:860px){
+    nav.links,.nav .btn{display:none}
+    .burger{display:block}
+    .hero{padding:64px 0 56px}
+    .hero-meta{grid-template-columns:1fr}
+    .hero-meta div{padding:16px 0 0}
+    .product,.about-grid,.contact-box,.work{grid-template-columns:1fr}
+    .contact-box{padding:40px 24px}
+    section.block{padding:64px 0}
   }
-  h1,h2,h3,.mano{ font-family:'Manrope', sans-serif; }
-  img{ max-width:100%; display:block; }
-  a{ color:inherit; }
-  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
-  }
-
-  /* ---- SCROLL PROGRESS ---- */
-  .progress{
-    position:fixed; top:0; left:0; height:3px; width:0%;
-    background:linear-gradient(90deg, var(--accent), var(--accent-2));
-    z-index:100;
-    transition:width .1s linear;
-  }
-
-  /* ---- NAV ---- */
-  nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(10,15,30,0.85);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(255,255,255,0.08);
-    padding:14px 24px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .nav-brand{ display:flex; align-items:center; gap:10px; color:#fff; text-decoration:none; }
-  .nav-brand img{ width:28px; height:28px; }
-  .nav-brand span{ font-family:'Manrope',sans-serif; font-weight:800; font-size:15px; letter-spacing:-.01em; }
-  .nav-links{ display:flex; align-items:center; gap:28px; }
-  .nav-links a{
-    color:#C4CBDA; text-decoration:none; font-size:13.5px; font-weight:600;
-    position:relative; padding:4px 0; transition:color .2s ease;
-  }
-  .nav-links a:hover{ color:#fff; }
-  .nav-links a.active::after{
-    content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px;
-    background:var(--accent-2);
-  }
-  .nav-cta{
-    background:var(--accent); color:#fff; text-decoration:none;
-    padding:9px 18px; border-radius:100px; font-size:13px; font-weight:700;
-    transition:transform .2s ease, background .2s ease;
-  }
-  .nav-cta:hover{ transform:translateY(-2px); background:#3B54E8; }
-  .burger{ display:none; background:none; border:none; color:#fff; font-size:22px; cursor:pointer; }
-  @media(max-width:860px){
-    .nav-links{ display:none; }
-    .nav-cta{ display:none; }
-    .burger{ display:block; }
-  }
-  .mobile-menu{
-    display:none; position:fixed; inset:0; z-index:60;
-    background:rgba(8,12,24,0.98); backdrop-filter:blur(10px);
-    flex-direction:column; align-items:center; justify-content:center; gap:26px;
-  }
-  .mobile-menu.open{ display:flex; }
-  .mobile-menu a{ color:#fff; text-decoration:none; font-size:20px; font-weight:700; font-family:'Manrope',sans-serif; }
-  .mobile-menu .close-x{ position:absolute; top:20px; right:24px; background:none; border:none; color:#fff; font-size:26px; }
-
-  /* ---- HERO ---- */
-  .hero{
-    position:relative;
-    background:var(--navy);
-    color:#fff;
-    padding:100px 24px 110px;
-    overflow:hidden;
-  }
-  .blob{
-    position:absolute; border-radius:50%;
-    filter:blur(90px); opacity:.35; pointer-events:none;
-  }
-  .blob-1{ width:420px; height:420px; background:var(--accent); top:-140px; left:-100px; animation:float1 14s ease-in-out infinite; }
-  .blob-2{ width:360px; height:360px; background:var(--accent-2); bottom:-160px; right:-80px; animation:float2 16s ease-in-out infinite; }
-  @keyframes float1{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(30px,40px); } }
-  @keyframes float2{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(-30px,-30px); } }
-  .hero-inner{ max-width:760px; margin:0 auto; text-align:center; position:relative; }
-  .hero-logo{ width:64px; height:64px; margin:0 auto 28px; opacity:0; animation:riseIn .7s ease forwards; }
-  h1.hero-title{
-    font-size:clamp(34px,6vw,58px);
-    font-weight:800;
-    line-height:1.12;
-    letter-spacing:-.02em;
-    margin-bottom:18px;
-    opacity:0; animation:riseIn .8s ease forwards; animation-delay:.1s;
-  }
-  h1.hero-title .grad{
-    background:linear-gradient(100deg, #8FA0FF, var(--accent-2));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero-sub{
-    font-size:17px; color:#AEB6C9; max-width:480px; margin:0 auto 38px;
-    opacity:0; animation:riseIn .8s ease forwards; animation-delay:.22s;
-  }
-  .hero-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
-    opacity:0; animation:riseIn .8s ease forwards; animation-delay:.34s; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:14px 26px; border-radius:100px;
-    font-size:14.5px; font-weight:700; text-decoration:none;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-    border:1px solid transparent;
-  }
-  .btn-primary{ background:var(--accent); color:#fff; box-shadow:0 12px 28px rgba(74,99,246,0.35); }
-  .btn-primary:hover{ transform:translateY(-2px); background:#3B54E8; }
-  .btn-ghost{ border-color:rgba(255,255,255,0.25); color:#fff; }
-  .btn-ghost:hover{ background:rgba(255,255,255,0.08); }
-  @keyframes riseIn{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
-
-  /* ---- REVEAL ---- */
-  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-
-  /* ---- SECTION shared ---- */
-  .section{ max-width:1160px; margin:0 auto; padding:88px 24px; }
-  .section-dark{ background:var(--navy); color:#fff; }
-  .section-off{ background:var(--offwhite); }
-  .eyebrow{
-    font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--accent); margin-bottom:14px;
-  }
-  .section-dark .eyebrow{ color:#8FA0FF; }
-  h2.h2{ font-size:clamp(26px,3.6vw,38px); font-weight:800; letter-spacing:-.02em; margin-bottom:14px; }
-  .lede{ color:var(--muted); font-size:16px; max-width:620px; }
-  .section-dark .lede{ color:#AEB6C9; }
-
-  /* ---- TRUST INTRO ---- */
-  .intro{ text-align:center; max-width:760px; margin:0 auto; padding:90px 24px; }
-  @media(max-width:640px){
-    .hero{ padding:56px 20px 60px; }
-    .hero-logo{ width:52px; height:52px; margin-bottom:18px; }
-    h1.hero-title{ font-size:clamp(28px,8vw,38px); margin-bottom:12px; }
-    .hero-sub{ font-size:15px; margin-bottom:26px; }
-    .hero-cta{ gap:10px; }
-    .btn{ padding:12px 22px; font-size:13.5px; }
-    .intro{ padding:56px 20px; }
-  }
-  .intro p{
-    font-family:'Manrope',sans-serif; font-weight:700;
-    font-size:clamp(19px,2.6vw,28px); line-height:1.5; color:var(--ink);
-  }
-  .intro p span{ color:var(--accent); }
-
-  /* ---- PRODUCT GRID ---- */
-  .cat-block{ margin-bottom:56px; }
-  .cat-block:last-child{ margin-bottom:0; }
-  .cat-label{
-    font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--muted); margin-bottom:18px; display:flex; align-items:center; gap:12px;
-  }
-  .cat-label::after{ content:""; flex:1; height:1px; background:var(--line); }
-  .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:22px; }
-  .card{
-    background:#fff; border:1px solid var(--line); border-radius:20px;
-    padding:26px; display:flex; flex-direction:column; gap:14px;
-    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-  }
-  .card:hover{ transform:translateY(-6px); box-shadow:0 24px 48px rgba(11,18,32,0.10); border-color:transparent; }
-  .card-top{ display:flex; align-items:center; justify-content:space-between; }
-  .card-icon{ width:46px; height:46px; border-radius:13px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.08); }
-  .card-icon img{ width:100%; height:100%; object-fit:cover; }
-  .badge{
-    font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
-    padding:4px 10px; border-radius:100px;
-  }
-  .badge-live{ background:#E5F6EE; color:var(--live); }
-  .badge-testing{ background:#FDECDD; color:var(--testing); }
-  .badge-soon{ background:#EEF0F4; color:var(--soon); }
-  .card h3{ font-size:18px; font-weight:800; }
-  .card p{ color:var(--muted); font-size:13.5px; }
-  .card-feats{ list-style:none; display:flex; flex-direction:column; gap:6px; }
-  .card-feats li{ font-size:12.5px; color:var(--muted); display:flex; align-items:center; gap:7px; }
-  .card-feats li::before{ content:"✓"; color:var(--accent); font-weight:700; }
-  .card-foot{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; }
-  .card-link{ font-size:13px; font-weight:700; color:var(--accent); text-decoration:none; }
-  .card-link:hover{ text-decoration:underline; }
-  .cat-tag{ font-size:11px; color:var(--muted); font-weight:600; }
-
-  /* ---- FEATURED ---- */
-  .feat-grid{ display:grid; grid-template-columns:1fr; gap:26px; }
-  .feat-card{
-    display:grid; grid-template-columns:1fr; gap:0;
-    background:#fff; border:1px solid var(--line); border-radius:24px; overflow:hidden;
-    transition:box-shadow .3s ease, transform .3s ease;
-  }
-  .feat-card:hover{ box-shadow:0 28px 60px rgba(11,18,32,0.12); transform:translateY(-4px); }
-  @media(min-width:820px){ .feat-card{ grid-template-columns:1.1fr 1fr; } .feat-card.rev{ grid-template-columns:1fr 1.1fr; } .feat-card.rev .feat-shot{ order:2; } }
-  .feat-shot{ background:var(--navy); min-height:220px; overflow:hidden; }
-  .feat-shot img{ width:100%; height:100%; object-fit:cover; object-position:top; }
-  .feat-body{ padding:40px; display:flex; flex-direction:column; gap:16px; justify-content:center; }
-  .feat-body h3{ font-size:24px; font-weight:800; }
-  .feat-body p{ color:var(--muted); font-size:14.5px; }
-  .feat-feats{ list-style:none; display:flex; flex-direction:column; gap:8px; margin:6px 0; }
-  .feat-feats li{ font-size:13.5px; color:var(--ink); display:flex; gap:8px; }
-  .feat-feats li::before{ content:"→"; color:var(--accent-2); font-weight:700; }
-
-  /* ---- WHY CARDS ---- */
-  .why-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:20px; }
-  .why-card{ background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:26px; }
-  .why-num{ font-family:'Manrope',sans-serif; font-size:12px; font-weight:800; color:var(--accent-2); margin-bottom:12px; }
-  .why-card h3{ font-size:17px; font-weight:800; margin-bottom:8px; }
-  .why-card p{ font-size:13.5px; color:#AEB6C9; }
-
-  /* ---- STORY / TIMELINE ---- */
-  .story-wrap{ display:grid; grid-template-columns:1fr; gap:40px; }
-  @media(min-width:860px){ .story-wrap{ grid-template-columns:1fr 1fr; align-items:start; } }
-  .story-text p{ color:var(--muted); font-size:15px; margin-bottom:16px; }
-  .timeline{ position:relative; padding-left:28px; }
-  .timeline::before{ content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:var(--line); }
-  .tl-item{ position:relative; padding-bottom:32px; }
-  .tl-item:last-child{ padding-bottom:0; }
-  .tl-item::before{
-    content:""; position:absolute; left:-28px; top:2px; width:12px; height:12px;
-    border-radius:50%; background:var(--accent); border:3px solid #fff; box-shadow:0 0 0 1px var(--line);
-  }
-  .tl-item h4{ font-size:14.5px; font-weight:800; margin-bottom:4px; }
-  .tl-item p{ font-size:13px; color:var(--muted); }
-
-  /* ---- NUMBERS ---- */
-  .num-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:20px; text-align:center; }
-  .num-card{ padding:30px 16px; }
-  .num-value{ font-family:'Manrope',sans-serif; font-size:clamp(30px,5vw,44px); font-weight:800; color:var(--accent); }
-  .num-label{ font-size:12.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:6px; }
-
-  /* ---- TOOLBOX ---- */
-  .tool-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:14px; }
-  .tool-chip{
-    background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px;
-    display:flex; flex-direction:column; gap:8px; text-decoration:none; color:var(--ink);
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .tool-chip:hover{ transform:translateY(-3px); box-shadow:0 14px 28px rgba(11,18,32,0.08); }
-  .tool-chip .free{ align-self:flex-start; background:#E5F6EE; color:var(--live); font-size:10px; font-weight:700; padding:3px 8px; border-radius:100px; letter-spacing:.04em; text-transform:uppercase; }
-  .tool-chip strong{ font-size:14px; }
-  .tool-chip span.desc{ font-size:12px; color:var(--muted); }
-
-  /* ---- PHILOSOPHY ---- */
-  .phil-row{ display:grid; grid-template-columns:1fr; gap:0; }
-  @media(min-width:760px){ .phil-row{ grid-template-columns:repeat(3,1fr); } }
-  .phil-step{ padding:30px; border-left:2px solid var(--line); position:relative; }
-  @media(max-width:759px){ .phil-step{ border-left:none; border-top:2px solid var(--line); padding:24px 0; } }
-  .phil-num{ font-family:'Manrope',sans-serif; font-weight:800; font-size:13px; color:var(--accent); margin-bottom:10px; }
-  .phil-step h3{ font-size:19px; font-weight:800; margin-bottom:8px; }
-  .phil-step p{ font-size:14px; color:var(--muted); }
-
-  /* ---- TECH ---- */
-  .tech-row{ display:flex; flex-wrap:wrap; gap:12px; }
-  .tech-chip{
-    padding:10px 18px; border-radius:100px; border:1px solid var(--line);
-    font-size:13px; font-weight:600; color:var(--ink); background:#fff;
-  }
-
-  /* ---- FUTURE CTA ---- */
-  .future{
-    background:linear-gradient(135deg, var(--navy), #16213D);
-    color:#fff; text-align:center; padding:100px 24px; position:relative; overflow:hidden;
-  }
-  .future h2{ font-size:clamp(28px,4.5vw,42px); font-weight:800; margin-bottom:16px; }
-  .future p{ color:#AEB6C9; max-width:520px; margin:0 auto 32px; font-size:16px; }
-
-  /* ---- CONTACT ---- */
-  .contact-grid{ display:grid; grid-template-columns:1fr; gap:20px; }
-  @media(min-width:700px){ .contact-grid{ grid-template-columns:repeat(3,1fr); } }
-  .contact-card{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:26px; text-decoration:none; color:var(--ink); transition:transform .2s ease, box-shadow .2s ease; }
-  .contact-card:hover{ transform:translateY(-4px); box-shadow:0 20px 40px rgba(11,18,32,0.1); }
-  .contact-card .lbl{ font-size:11.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:8px; font-weight:700; }
-  .contact-card .val{ font-size:15px; font-weight:700; }
-
-  /* ---- FOOTER ---- */
-  footer{ background:var(--navy); color:#AEB6C9; padding:60px 24px 30px; }
-  .foot-inner{ max-width:1160px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:36px; }
-  @media(min-width:700px){ .foot-inner{ grid-template-columns:1.4fr repeat(3,1fr); } }
-  .foot-brand{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-  .foot-brand img{ width:26px; height:26px; }
-  .foot-brand span{ color:#fff; font-weight:800; font-family:'Manrope',sans-serif; }
-  .foot-tag{ font-size:13px; color:#8590A6; }
-  .foot-col h4{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#8590A6; margin-bottom:14px; }
-  .foot-col a{ display:block; color:#C4CBDA; text-decoration:none; font-size:13.5px; margin-bottom:10px; }
-  .foot-col a:hover{ color:#fff; }
-  .foot-bottom{ max-width:1160px; margin:40px auto 0; padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); font-size:12.5px; color:#7A8494; text-align:center; }
 </style>
-<link rel="canonical" href="https://jmrapps.com/">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "JMR Apps",
-  "url": "https://jmrapps.com/",
-  "logo": "https://jmrapps.com/assets/jmr-logo.png",
-  "description": "JMR Apps builds practical digital products for business, healthcare, productivity and everyday needs.",
-  "email": "hello@jmrapps.com",
-  "slogan": "Building a Smarter Tomorrow."
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "JMR Apps",
-  "url": "https://jmrapps.com/"
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SiteNavigationElement",
-  "name": [
-    "Apps", "Tools", "About", "Contact",
-    "Smart Cable Manager", "Smart Hospital Queue", "Happy Homes",
-    "Smart Quotation", "Smart Invoice", "Smart Receipt", "Smart Expense", "JMR Business Suite",
-    "Muthu Tamil Calendar", "Insider Ingredient Scanner",
-    "Dawa Info", "MU Piping Calculator", "HTML Viewer", "Kruvi Tools"
-  ],
-  "url": [
-    "https://jmrapps.com/#products",
-    "https://jmrapps.com/#toolbox",
-    "https://jmrapps.com/#story",
-    "https://jmrapps.com/#contact",
-    "https://muthurajjeyabal.github.io/smart-cable-manager/",
-    "https://www.smarthospitalqueue.com",
-    "https://muthurajjeyabal.github.io/happy-homes/",
-    "https://muthurajjeyabal.github.io/Smart-invoice-/quotation.html",
-    "https://muthurajjeyabal.github.io/Smart-invoice-/invoice.html",
-    "https://muthurajjeyabal.github.io/Smart-invoice-/receipt.html",
-    "https://muthurajjeyabal.github.io/Smart-invoice-/expense.html",
-    "https://muthurajjeyabal.github.io/Smart-invoice-/",
-    "https://muthurajjeyabal.github.io/Muthu-TamilCalender/",
-    "https://ingredient-scanner-teal.vercel.app",
-    "https://muthurajjeyabal.github.io/Dawa-info/",
-    "https://play.google.com/store/apps/details?id=com.muthurajjeyabal.mupiping",
-    "https://muthurajjeyabal.github.io/Html-viewer-/",
-    "https://muthurajjeyabal.github.io/kruvi-toolbox-/"
-  ]
-}
-</script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c95c84eb84e045a8b0e30dd98735cf6b"}'></script><!-- End Cloudflare Web Analytics -->
-<!-- Google Analytics (GA4) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-V5Q61XPTWG"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "G-V5Q61XPTWG");</script><!-- End Google Analytics -->
 </head>
 <body>
-
-<div class="progress" id="progress"></div>
-
-<nav>
-  <a href="#top" class="nav-brand"><img src="assets/jmr-logo.png" alt="JMR Apps"><span>JMR Apps</span></a>
-  <div class="nav-links">
-    <a href="#top">Home</a>
-    <a href="#products">Apps</a>
-    <a href="#toolbox">Tools</a>
-    <a href="#story">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <a href="#products" class="nav-cta">Explore Apps</a>
-  <button class="burger" id="burgerBtn" aria-label="Open menu">☰</button>
-</nav>
-
-<div class="mobile-menu" id="mobileMenu">
-  <button class="close-x" id="closeMenuBtn" aria-label="Close menu">✕</button>
-  <a href="#top">Home</a>
-  <a href="#products">Apps</a>
-  <a href="#toolbox">Tools</a>
-  <a href="#story">About</a>
-  <a href="#contact">Contact</a>
-</div>
-
-<header class="hero" id="top">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="hero-inner">
-    <h1 class="hero-title">JMR Apps<br><span class="grad">Building a Smarter Tomorrow.</span></h1>
-    <p class="hero-sub">Smart apps. Real solutions. Built for the future.</p>
-    <div class="hero-cta">
-      <a href="#products" class="btn btn-primary">Explore Our Apps</a>
-      <a href="#story" class="btn btn-ghost">About JMR Apps</a>
-    </div>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img src="assets/jmr-logo.png" alt="JMR Apps">
+      <span>
+        <span class="brand-name">JMR Apps</span>
+        <span class="brand-sub">Established studio</span>
+      </span>
+    </a>
+    <nav class="links">
+      <a href="#product">Smart Queue</a>
+      <a href="#about">Who we are</a>
+      <a href="#work">Other work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-gold" href="https://www.smarthospitalqueue.com" target="_blank" rel="noopener">View Smart Queue</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<section class="intro reveal">
-  <p>JMR Apps builds practical digital products designed to solve real-world problems — <span>from business management and healthcare to productivity and everyday utilities.</span></p>
+<div class="mobile" id="mobile">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <strong>JMR Apps</strong>
+    <button class="burger" id="close" aria-label="Close"><span></span><span></span></button>
+  </div>
+  <a href="#product">Smart Queue</a>
+  <a href="#about">Who we are</a>
+  <a href="#work">Other work</a>
+  <a href="#contact">Contact</a>
+  <a href="https://www.smarthospitalqueue.com" target="_blank" rel="noopener">Open Smart Queue</a>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">JMR Apps</div>
+    <h1>Software built by people who still run the operation.</h1>
+    <p class="lead">JMR Apps is a small product studio. We do not sell a catalogue of experiments. We build tools that survive a working morning — first in our own business, then for clinics and operators who have the same problem.</p>
+    <div class="hero-actions">
+      <a class="btn btn-white" href="https://www.smarthospitalqueue.com" target="_blank" rel="noopener">Open Smart Queue</a>
+      <a class="btn btn-line" href="#contact" style="color:#fff;border-color:rgba(255,255,255,.3)">Speak with the builder</a>
+    </div>
+    <div class="hero-meta">
+      <div><strong>Smart Queue</strong><span>Flagship product for hospitals and clinics</span></div>
+      <div><strong>2,000</strong><span>Cable subscribers billed on software we run daily</span></div>
+      <div><strong>Field-first</strong><span>Designed beside the counter, not from a slide deck</span></div>
+    </div>
+  </div>
 </section>
 
-<section class="section" id="products">
-  <div class="eyebrow reveal">Our Products</div>
-  <h2 class="h2 reveal">Ten products. One studio.</h2>
-  <p class="lede reveal" style="margin-bottom:50px;">Every product here was built to fix a real, specific problem — not to pad a portfolio.</p>
+<section class="block" id="product">
+  <div class="wrap product">
+    <div>
+      <div class="badge">Flagship product</div>
+      <h2 class="h2">Smart Queue for hospitals and clinics.</h2>
+      <p class="lede">Waiting rooms waste the morning. Reception, the doctor, and the patient should see the same live token and the same wait time. Paper tokens and shouted names are the old system. This replaces them.</p>
+      <ul class="checks">
+        <li>Reception, doctor, and patient views stay in sync.</li>
+        <li>Live token number and a simple estimated wait.</li>
+        <li>Works in the browser. No app install for patients.</li>
+        <li>Built for a small clinic first — not a 500-bed brochure.</li>
+      </ul>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="https://www.smarthospitalqueue.com" target="_blank" rel="noopener">Visit smarthospitalqueue.com</a>
+        <a class="btn btn-line" href="https://wa.me/919597899960" target="_blank" rel="noopener">Request a demo</a>
+      </div>
+    </div>
+    <aside class="panel">
+      <h3>Live queue — sample</h3>
+      <div class="queue">
+        <div class="q-row now"><div><small>Now serving · Room 3</small><b>Token 042</b></div><div style="text-align:right"><small>Dr. Meena</small>General OPD</div></div>
+        <div class="q-row"><div><small>Waiting</small><b>Token 043</b></div><div style="text-align:right"><small>ETA</small>~08 min</div></div>
+        <div class="q-row"><div><small>Waiting</small><b>Token 044</b></div><div style="text-align:right"><small>ETA</small>~16 min</div></div>
+        <div class="q-row"><div><small>Issued today</small><b>118</b></div><div style="text-align:right"><small>Avg. wait</small>11 min</div></div>
+      </div>
+    </aside>
+  </div>
+</section>
 
-  <div class="cat-block reveal">
-    <div class="cat-label">Business</div>
-    <div class="grid">
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background:#0A0F1E;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Manrope';font-weight:800;">SC</div>
-          <span class="badge badge-live">Live</span>
-        </div>
+<section class="block" id="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="badge">Who built this</div>
+    <h2 class="h2">A company page, so you know who answers the phone.</h2>
+    <p class="lede">If you are considering Smart Queue, you will ask who is behind it. This site exists for that question.</p>
+    <div class="about-grid">
+      <div>
+        <div class="rule"></div>
+        <p>JMR Apps is run by an operator who still manages a cable television network of about 2,000 customers. The billing, collections, box stock, and field-collector tools used on that network were written here — and are used every day, including by two other operators.</p>
+        <p style="margin-top:16px">That is the working method: see the friction at the counter, build the smallest system that removes it, then keep it running. Smart Queue comes from the same method, applied to a clinic waiting room.</p>
+      </div>
+      <div class="about-card">
+        <h3 class="h2" style="font-size:28px;margin-bottom:10px">What we will not claim</h3>
+        <p style="color:var(--muted)">This is not a venture studio with ten commercial products. Other tools on this site were built to learn, or to solve a personal need. They are listed so the work is visible. They are not the business we are asking you to buy.</p>
+        <p style="margin-top:14px">If you run a clinic or a cable network and the current system wastes the morning, write to the person who built the software.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block muted-section" id="work">
+  <div class="wrap">
+    <div class="badge">Also in operation</div>
+    <h2 class="h2">Other work, kept in its place.</h2>
+    <p class="lede">Useful, and secondary. Smart Queue is the product we present to institutions.</p>
+    <div class="work">
+      <a href="https://muthurajjeyabal.github.io/smart-cable-manager/" target="_blank" rel="noopener">
+        <div class="tag">Operations</div>
         <h3>Smart Cable Manager</h3>
-        <p>Full admin panel for cable TV operators — customers, billing, collections, box stock, and reports.</p>
-        <ul class="card-feats">
-          <li>Customer &amp; billing management</li>
-          <li>Collector app for field agents</li>
-          <li>WhatsApp reminders &amp; reports</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Business</span>
-          <a href="https://muthurajjeyabal.github.io/smart-cable-manager/" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background:#0A0F1E;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Manrope';font-weight:800;">HH</div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Happy Homes</h3>
-        <p>A home-services marketplace — police-verified professionals, transparent GST pricing, and OTP-based job closure.</p>
-        <ul class="card-feats">
-          <li>Verified &amp; background-checked pros</li>
-          <li>Live job tracking &amp; OTP close</li>
-          <li>Emergency desk with 30-min SLA</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Business</span>
-          <a href="https://muthurajjeyabal.github.io/happy-homes/" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background:#0A0F1E;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Manrope';font-weight:800;">SQ</div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Smart Quotation</h3>
-        <p>Create and send quotations, track follow-ups, and convert accepted quotes to invoices in one tap.</p>
-        <ul class="card-feats">
-          <li>Follow-up tracking &amp; conversion rate</li>
-          <li>WhatsApp quote sharing</li>
-          <li>One-tap convert to invoice</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Business</span>
-          <a href="https://muthurajjeyabal.github.io/Smart-invoice-/quotation.html" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background:#0A0F1E;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Manrope';font-weight:800;">SI</div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Smart Invoice</h3>
-        <p>GST billing made simple — create invoices, manage customers and stock, and track payments in one place.</p>
-        <ul class="card-feats">
-          <li>GST invoices (CGST/SGST/IGST) with barcode</li>
-          <li>Customer &amp; product/stock management</li>
-          <li>WhatsApp reminders &amp; UPI payment links</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Business</span>
-          <a href="https://muthurajjeyabal.github.io/Smart-invoice-/invoice.html" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background:#0A0F1E;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Manrope';font-weight:800;">SR</div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Smart Receipt</h3>
-        <p>Print or share clean payment receipts instantly — connected to the same customers and invoices.</p>
-        <ul class="card-feats">
-          <li>Instant print-ready receipts</li>
-          <li>WhatsApp share</li>
-          <li>Shared customer &amp; invoice data</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Business</span>
-          <a href="https://muthurajjeyabal.github.io/Smart-invoice-/receipt.html" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background:#0A0F1E;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Manrope';font-weight:800;">SE</div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Smart Expense</h3>
-        <p>Track business expenses by category and see real profit — sales minus expenses — for the month at a glance.</p>
-        <ul class="card-feats">
-          <li>Expense categories &amp; monthly breakdown</li>
-          <li>Sales − Expenses = Profit, automatically</li>
-          <li>Shared with the rest of the suite</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Business</span>
-          <a href="https://muthurajjeyabal.github.io/Smart-invoice-/expense.html" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background:#0A0F1E;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Manrope';font-weight:800;">JB</div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>JMR Business Suite</h3>
-        <p>The connected hub — Quotation → Invoice → Receipt → Expense, all under one login, one customer list, one product list, in 10 Indian languages.</p>
-        <ul class="card-feats">
-          <li>Same login across all four apps</li>
-          <li>Shared customers &amp; products</li>
-          <li>Available in 10 Indian languages</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Business</span>
-          <a href="https://muthurajjeyabal.github.io/Smart-invoice-/" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cat-block reveal">
-    <div class="cat-label">Healthcare</div>
-    <div class="grid">
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon" style="background:#0A0F1E;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Manrope';font-weight:800;">SQ</div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Smart Hospital Queue</h3>
-        <p>Real-time OPD queue management — reception, doctor, and patient views stay in sync with live tokens.</p>
-        <ul class="card-feats">
-          <li>Live token &amp; smart ETA</li>
-          <li>Reception, doctor &amp; patient views</li>
-          <li>No app install required</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Healthcare</span>
-          <a href="https://www.smarthospitalqueue.com" target="_blank" rel="noopener" class="card-link">Visit site →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon"><img src="icons/icon-dawa.jpg" alt="Dawa Info"></div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Dawa Info</h3>
-        <p>Search 240,000+ medicines offline — compare prices, get safety info, and set reminders.</p>
-        <ul class="card-feats">
-          <li>240,000+ medicines, offline</li>
-          <li>Cheaper generic suggestions</li>
-          <li>Safety profile by condition</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Healthcare</span>
-          <a href="https://muthurajjeyabal.github.io/Dawa-info/" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cat-block reveal">
-    <div class="cat-label">Productivity</div>
-    <div class="grid">
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon"><img src="icons/icon-htmlviewer.png" alt="HTML Viewer"></div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>HTML Viewer</h3>
-        <p>Open, edit, and preview HTML files or full folders — CSS, JS, and images — right on your phone.</p>
-        <ul class="card-feats">
-          <li>Open files or full folders</li>
-          <li>Live preview + editing</li>
-          <li>Sample templates included</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Productivity</span>
-          <a href="https://muthurajjeyabal.github.io/Html-viewer-/" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cat-block reveal">
-    <div class="cat-label">Utilities</div>
-    <div class="grid">
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon"><img src="icons/icon-piping.png" alt="MU Piping Calculator"></div>
-          <span class="badge badge-live">On Play Store</span>
-        </div>
+        <p>Subscriber billing, collections, STB stock, and a collector app — used on our own 2,000-home network.</p>
+      </a>
+      <a href="https://jmrlifting.com" target="_blank" rel="noopener">
+        <div class="tag">Engineering</div>
+        <h3>JMR Lifting</h3>
+        <p>Field software from two decades in crane and lifting work. Separate site: jmrlifting.com.</p>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.muthurajjeyabal.mupiping" target="_blank" rel="noopener">
+        <div class="tag">Utilities</div>
         <h3>MU Piping Calculator</h3>
-        <p>Pipe weight, volume, schedule, elbows, mitre bends, and flange data — fast and professional.</p>
-        <ul class="card-feats">
-          <li>16 engineering calculators</li>
-          <li>B31.3 stress analysis</li>
-          <li>Material take-off summary</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Utilities</span>
-          <a href="https://play.google.com/store/apps/details?id=com.muthurajjeyabal.mupiping" target="_blank" rel="noopener" class="card-link">Get it on Play Store →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon"><img src="icons/icon-calendar.png" alt="Muthu Tamil Calendar"></div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>முத்து தமிழ் காலண்டர்</h3>
-        <p>Daily panchangam, rasi palan, muhurtham dates, and an AI astrologer — a traditional wall calendar, digital.</p>
-        <ul class="card-feats">
-          <li>Full daily panchangam</li>
-          <li>AI astrologer chat</li>
-          <li>Muhurtham date finder</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Utilities</span>
-          <a href="apps/tamil-calendar.html" class="card-link">Learn more →</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon"><img src="icons/icon-scanner.jpg" alt="Insider Ingredient Scanner"></div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Insider — Ingredient Scanner</h3>
-        <p>Scan any Indian food, cosmetic, or personal care label to see what's really inside.</p>
-        <ul class="card-feats">
-          <li>AI label scanning</li>
-          <li>Ingredient &amp; chemical breakdown</li>
-          <li>Nutrition assessment</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Utilities</span>
-          <a href="apps/insider-scanner.html" class="card-link">Learn more →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cat-block reveal">
-    <div class="cat-label">Tools</div>
-    <div class="grid">
-      <div class="card">
-        <div class="card-top">
-          <div class="card-icon"><img src="icons/icon-kruvi.png" alt="Kruvi Tools"></div>
-          <span class="badge badge-live">Live</span>
-        </div>
-        <h3>Kruvi Tools</h3>
-        <p>100+ free everyday utilities — PDF, image, text, calculator, developer, and QR tools.</p>
-        <ul class="card-feats">
-          <li>100+ tools, no sign-up</li>
-          <li>PDF, image &amp; text tools</li>
-          <li>Developer &amp; QR utilities</li>
-        </ul>
-        <div class="card-foot">
-          <span class="cat-tag">Tools</span>
-          <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" target="_blank" rel="noopener" class="card-link">Open →</a>
-        </div>
-      </div>
+        <p>Pipe weight, schedule, bends, and take-off tools on the Play Store.</p>
+      </a>
     </div>
   </div>
 </section>
 
-<section class="section section-off" id="featured">
-  <div class="eyebrow reveal">Featured</div>
-  <h2 class="h2 reveal">The flagship builds</h2>
-  <p class="lede reveal" style="margin-bottom:44px;">The three products that best show what JMR Apps is about.</p>
-
-  <div class="feat-grid">
-    <div class="feat-card reveal">
-      <div class="feat-shot"><img src="screenshots/shot-scanner.jpg" alt="Insider — Ingredient Scanner"></div>
-      <div class="feat-body">
-        <span class="badge badge-live" style="width:fit-content;">Live · Utilities</span>
-        <h3>Insider — Ingredient Scanner</h3>
-        <p>Scan any Indian food, cosmetic, or personal care label with AI to see exactly what's really inside.</p>
-        <ul class="feat-feats">
-          <li>AI-powered label scanning</li>
-          <li>Ingredient &amp; chemical breakdown</li>
-          <li>Nutrition assessment &amp; allergen warnings</li>
-        </ul>
-        <a href="apps/insider-scanner.html" class="btn btn-primary" style="width:fit-content;">Learn more →</a>
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <div>
+        <div class="kicker">Contact</div>
+        <h2 class="h2">Speak directly with the person who built it.</h2>
+        <p>For a Smart Queue demo, or for cable billing used in the field. No ticket system. A WhatsApp message is enough.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:hello@jmrapps.com">hello@jmrapps.com <span>Email</span></a>
+        <a href="https://wa.me/919597899960" target="_blank" rel="noopener">+91 95978 99960 <span>WhatsApp</span></a>
+        <a href="https://www.smarthospitalqueue.com" target="_blank" rel="noopener">smarthospitalqueue.com <span>Product</span></a>
       </div>
     </div>
-
-    <div class="feat-card rev reveal">
-      <div class="feat-shot"><img src="screenshots/shot-calendar.jpg" alt="Muthu Tamil Calendar"></div>
-      <div class="feat-body">
-        <span class="badge badge-live" style="width:fit-content;">Live · Utilities</span>
-        <h3>முத்து தமிழ் காலண்டர்</h3>
-        <p>A full panchangam and life-assistant app, styled like a traditional wall calendar — with a built-in AI astrologer.</p>
-        <ul class="feat-feats">
-          <li>Daily rasi palan, muhurtham &amp; temple dates</li>
-          <li>Personalized natal chart readings</li>
-          <li>Vastu &amp; auspicious-date finders</li>
-        </ul>
-        <a href="apps/tamil-calendar.html" class="btn btn-primary" style="width:fit-content;">Learn more →</a>
-      </div>
-    </div>
-
-    <div class="feat-card reveal">
-      <div class="feat-shot"><img src="screenshots/shot-kruvi.jpg" alt="Kruvi Tools"></div>
-      <div class="feat-body">
-        <span class="badge badge-live" style="width:fit-content;">Live · Tools</span>
-        <h3>Kruvi Tools</h3>
-        <p>A single home for 100+ free everyday utilities — no account, no install, just open and use.</p>
-        <ul class="feat-feats">
-          <li>PDF, image, and text tools</li>
-          <li>Calculators &amp; unit converters</li>
-          <li>Developer &amp; QR code utilities</li>
-        </ul>
-        <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" target="_blank" rel="noopener" class="btn btn-primary" style="width:fit-content;">Open app →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-dark" id="why">
-  <div class="eyebrow reveal">Why JMR Apps</div>
-  <h2 class="h2 reveal">Built for real problems.</h2>
-  <div class="why-grid" style="margin-top:40px;">
-    <div class="why-card reveal">
-      <div class="why-num">01 — Practical</div>
-      <h3>Practical</h3>
-      <p>Technology designed around real-world needs.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-num">02 — Simple</div>
-      <h3>Simple</h3>
-      <p>Powerful functionality without unnecessary complexity.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-num">03 — Smart</div>
-      <h3>Smart</h3>
-      <p>Modern tools designed to save time and improve productivity.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-num">04 — Future Ready</div>
-      <h3>Future Ready</h3>
-      <p>Built with scalable technology and a long-term vision.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="story">
-  <div class="eyebrow reveal">The Story</div>
-  <h2 class="h2 reveal">Built from real-world experience.</h2>
-  <div class="story-wrap" style="margin-top:30px;">
-    <div class="story-text reveal">
-      <p>JMR Apps didn't start in a boardroom. It started with 20+ years of hands-on experience in crane operations and lifting engineering — solving problems on job sites where the right tool simply didn't exist yet.</p>
-      <p>That same instinct — find the real problem, build the simplest thing that solves it — carried over when the work turned to software. Every product in this suite exists because someone needed it first.</p>
-    </div>
-    <div class="timeline reveal">
-      <div class="tl-item">
-        <h4>Field Experience</h4>
-        <p>20+ years in crane, rigging, and lifting engineering — the source of every problem worth solving.</p>
-      </div>
-      <div class="tl-item">
-        <h4>Self-Taught Developer</h4>
-        <p>Learned to design and build software independently, without a formal background in it.</p>
-      </div>
-      <div class="tl-item">
-        <h4>First Products</h4>
-        <p>Built engineering software for the lifting industry, then expanded into everyday consumer tools.</p>
-      </div>
-      <div class="tl-item">
-        <h4>A Growing Suite</h4>
-        <p>Ten products live today, spanning business software, healthcare, and everyday utilities.</p>
-      </div>
-      <div class="tl-item">
-        <h4>What's Next</h4>
-        <p>Continuing to build — one real problem at a time.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-off" id="numbers">
-  <div class="eyebrow reveal">Impact</div>
-  <h2 class="h2 reveal">Where things stand today.</h2>
-  <div class="num-grid" style="margin-top:40px;">
-    <div class="num-card reveal"><div class="num-value" data-count="10">0</div><div class="num-label">Products Built</div></div>
-    <div class="num-card reveal"><div class="num-value" data-count="100" data-suffix="+">0</div><div class="num-label">Free Tools</div></div>
-    <div class="num-card reveal"><div class="num-value" data-count="240000" data-suffix="+" data-format="comma">0</div><div class="num-label">Medicines Indexed</div></div>
-    <div class="num-card reveal"><div class="num-value" data-count="20" data-suffix="+">0</div><div class="num-label">Years Field Experience</div></div>
-  </div>
-</section>
-
-<section class="section" id="toolbox">
-  <div class="eyebrow reveal">JMR Toolbox</div>
-  <h2 class="h2 reveal">Useful tools. Free to use.</h2>
-  <p class="lede reveal" style="margin-bottom:36px;">Part of Kruvi Tools — no sign-up, no install, just open and use.</p>
-  <div class="tool-grid reveal">
-    <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" target="_blank" rel="noopener" class="tool-chip">
-      <span class="free">Free</span><strong>PDF Tools</strong><span class="desc">Merge, split, compress</span>
-    </a>
-    <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" target="_blank" rel="noopener" class="tool-chip">
-      <span class="free">Free</span><strong>Image Tools</strong><span class="desc">Compress, convert, resize</span>
-    </a>
-    <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" target="_blank" rel="noopener" class="tool-chip">
-      <span class="free">Free</span><strong>Text Tools</strong><span class="desc">Counters, case, generators</span>
-    </a>
-    <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" target="_blank" rel="noopener" class="tool-chip">
-      <span class="free">Free</span><strong>Calculators</strong><span class="desc">BMI, units, and more</span>
-    </a>
-    <a href="https://muthurajjeyabal.github.io/kruvi-toolbox-/" target="_blank" rel="noopener" class="tool-chip">
-      <span class="free">Free</span><strong>Developer Tools</strong><span class="desc">JSON, formatters, QR</span>
-    </a>
-    <a href="https://muthurajjeyabal.github.io/Html-viewer-/" target="_blank" rel="noopener" class="tool-chip">
-      <span class="free">Free</span><strong>HTML Viewer</strong><span class="desc">Open, edit, preview files</span>
-    </a>
-  </div>
-</section>
-
-<section class="section section-dark" id="philosophy">
-  <div class="eyebrow reveal">Philosophy</div>
-  <h2 class="h2 reveal">Think. Build. Improve.</h2>
-  <div class="phil-row reveal" style="margin-top:36px;">
-    <div class="phil-step">
-      <div class="phil-num">01 — Think</div>
-      <h3>Think</h3>
-      <p>Understand the real problem before writing a line of code.</p>
-    </div>
-    <div class="phil-step">
-      <div class="phil-num">02 — Build</div>
-      <h3>Build</h3>
-      <p>Create a simple and useful solution — nothing more than needed.</p>
-    </div>
-    <div class="phil-step">
-      <div class="phil-num">03 — Improve</div>
-      <h3>Improve</h3>
-      <p>Ship it, use it, and continuously make it better.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="technology">
-  <div class="eyebrow reveal">Technology</div>
-  <h2 class="h2 reveal">What it's built with.</h2>
-  <div class="tech-row reveal" style="margin-top:26px;">
-    <span class="tech-chip">Web (HTML · CSS · JS)</span>
-    <span class="tech-chip">Flutter</span>
-    <span class="tech-chip">Firebase</span>
-    <span class="tech-chip">Gemini AI</span>
-    <span class="tech-chip">GitHub Pages</span>
-    <span class="tech-chip">Vercel</span>
-  </div>
-</section>
-
-<section class="future">
-  <div class="blob blob-1" style="opacity:.2;"></div>
-  <div class="blob blob-2" style="opacity:.2;"></div>
-  <div class="reveal" style="position:relative;">
-    <div class="eyebrow" style="justify-content:center;display:flex;">Future Vision</div>
-    <h2>Building what's next.</h2>
-    <p>JMR Apps is continuously exploring new ideas, smarter tools, and practical digital products for tomorrow.</p>
-    <a href="#products" class="btn btn-primary">Explore JMR Apps</a>
-  </div>
-</section>
-
-<section class="section" id="contact">
-  <div class="eyebrow reveal">Contact</div>
-  <h2 class="h2 reveal">Have an idea?</h2>
-  <p class="lede reveal" style="margin-bottom:40px;">Let's turn a real problem into a practical digital solution.</p>
-  <div class="contact-grid reveal">
-    <a href="mailto:hello@jmrapps.com" class="contact-card">
-      <div class="lbl">Email</div>
-      <div class="val">hello@jmrapps.com</div>
-    </a>
-    <a href="https://wa.me/919597899960" target="_blank" rel="noopener" class="contact-card">
-      <div class="lbl">WhatsApp</div>
-      <div class="val">Chat with us →</div>
-    </a>
-    <a href="https://jmrlifting.com" target="_blank" rel="noopener" class="contact-card">
-      <div class="lbl">Engineering Software</div>
-      <div class="val">jmrlifting.com →</div>
-    </a>
   </div>
 </section>
 
 <footer>
-  <div class="foot-inner">
-    <div>
-      <div class="foot-brand"><img src="assets/jmr-logo.png" alt="JMR Apps"><span>JMR Apps</span></div>
-      <div class="foot-tag">Building a Smarter Tomorrow.</div>
-    </div>
-    <div class="foot-col">
-      <h4>Products</h4>
-      <a href="#products">Business</a>
-      <a href="#products">Healthcare</a>
-      <a href="#products">Utilities</a>
-    </div>
-    <div class="foot-col">
-      <h4>More</h4>
-      <a href="#toolbox">Tools</a>
-      <a href="#story">About</a>
-    </div>
-    <div class="foot-col">
-      <h4>Contact</h4>
-      <a href="mailto:hello@jmrapps.com">Email</a>
-      <a href="https://wa.me/919597899960" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
+  <div class="wrap foot">
+    <div>© 2026 JMR Apps. Practical software for operators and clinics.</div>
+    <div>jmrapps.com</div>
   </div>
-  <div class="foot-bottom">© 2026 JMR Apps. Building a Smarter Tomorrow.</div>
 </footer>
-
 <script>
-  // scroll progress
-  const progress = document.getElementById('progress');
-  window.addEventListener('scroll', ()=>{
-    const h = document.documentElement;
-    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    progress.style.width = pct + '%';
-  });
-
-  // mobile menu
-  const burgerBtn = document.getElementById('burgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const closeMenuBtn = document.getElementById('closeMenuBtn');
-  burgerBtn.addEventListener('click', ()=> mobileMenu.classList.add('open'));
-  closeMenuBtn.addEventListener('click', ()=> mobileMenu.classList.remove('open'));
-  mobileMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mobileMenu.classList.remove('open')));
-
-  // scroll reveal
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold:0.12 });
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  // counters
-  const counters = document.querySelectorAll('[data-count]');
-  const cio = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const el = e.target;
-        const target = parseInt(el.dataset.count, 10);
-        const suffix = el.dataset.suffix || '';
-        const format = el.dataset.format;
-        const dur = 1400;
-        const start = performance.now();
-        function tick(now){
-          const p = Math.min((now-start)/dur, 1);
-          const val = Math.floor(p * target);
-          el.textContent = (format==='comma' ? val.toLocaleString('en-IN') : val) + suffix;
-          if(p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-        cio.unobserve(el);
-      }
-    });
-  }, { threshold:0.5 });
-  counters.forEach(el=>cio.observe(el));
+  const mobile = document.getElementById('mobile');
+  document.getElementById('burger').onclick = () => mobile.classList.add('open');
+  document.getElementById('close').onclick = () => mobile.classList.remove('open');
+  mobile.querySelectorAll('a').forEach(a => a.onclick = () => mobile.classList.remove('open'));
 </script>
-
 </body>
 </html>
